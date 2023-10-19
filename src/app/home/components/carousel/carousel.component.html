@@ -1,0 +1,36 @@
+<p-carousel
+    [value]="mediaArray"
+    [numVisible]="6"
+    [numScroll]="1"
+    [responsiveOptions]="responsiveOptionsCarousel"
+    [showIndicators]="false"
+    [circular]="false"
+    [autoplayInterval]="6000000000"
+    >
+
+    <ng-template pTemplate="header" class="header-carousel m-0 p-0">
+        <h2 class="pl-6">{{title}}</h2>
+    </ng-template>
+    
+    <ng-template let-item pTemplate="item">
+        <div class="media-item bg-black-alpha-70">
+        <!-- <div class="media-item"> -->
+            <div class="media-item-content">
+            <!-- <div class="media-item-content bg-black-alpha-80"> -->
+                <!-- <div class=""> -->
+                    <p-image 
+                        [src]="'https://image.tmdb.org/t/p/w500/'+item.poster_path" 
+                        [alt]="item.title" 
+                        class="media-image"
+                        [ngStyle]="{'cursor':'pointer'}"
+                        (click)="onClickImage(item)"
+                        width="100%"
+           
+                    >
+
+                    </p-image>
+                <!-- </div> -->
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

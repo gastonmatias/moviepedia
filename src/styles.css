@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "primeng/resources/themes/lara-light-blue/theme.css"; */
+@import "primeng/resources/themes/lara-dark-purple/theme.css";
+@import "primeng/resources/primeng.css";
+
+/* ! PRIME FLEX */
+@import '/node_modules/primeflex/primeflex.css';
+
+/* ! PRIME FLEX DARK MODE */
+/* @import '/node_modules/primeflex/themes/primeone-dark.css'; */
+
+/* ! PRIMENG ICONS */
+@import "primeicons/primeicons.css";
+
+/* html, body { height: 100%; } */
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #1A103C;
+}

@@ -1,0 +1,42 @@
+.media-item {
+    .media-item-content {
+        /* border: 1px solid var(--surface-d); */
+        /* border: 1px solid white; */
+        border-radius: 3px;
+        margin: 0 .3rem;
+        text-align: center;
+        padding: .6rem 0 ;
+        /* padding: .3rem 0 .3rem 0; */
+        height: 100%;
+    }
+
+    .media-image {
+        /* width: 100%; */
+        max-width: 90%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+         /* Agregamos una transición para suavizar el cambo */
+        transition: filter 0.3s; 
+    }
+
+    .media-image:hover {
+        filter: brightness(1.2); 
+        filter: saturate(1.4);
+    }
+}
+
+/* .media-item {
+    .media-item-content {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--surface-d);
+        border-radius: 3px;
+        margin: 0.3rem;
+        text-align: center;
+        height: 100%;
+    }
+
+    .media-image {
+        width: 100%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+} */
