@@ -16,30 +16,31 @@ export class ThemoviedbService {
   }
   
   get httpParams(){
-    return new HttpParams().set('limit',10)
+    return new HttpParams().set('page',10)
   }
 
   constructor(private httpClient:HttpClient) {}
   
-  getTrendingMovies():Observable<any> {
+  getTrendingMovies( page:number = 1 ):Observable<any> {
 
     return this.httpClient.get(
       `${this.base_url}/trending/movie/week`,
-      {headers:this.httpHeaders, params: this.httpParams}
+      // { headers:this.httpHeaders, params: this.httpParams }
+      { headers:this.httpHeaders, params:{page} }
     )
   }
   
-  getPopularMovies():Observable<any> {
+  getPopularMovies(page:number = 1):Observable<any> {
     return this.httpClient.get(
       `${this.base_url}/movie/popular`,
-      {headers:this.httpHeaders, params: this.httpParams}
+      {headers:this.httpHeaders, params: {page} }
     )
   }
   
-  getTopRatedMovies():Observable<any> {
+  getTopRatedMovies(page:number = 1):Observable<any> {
     return this.httpClient.get(
       `${this.base_url}/movie/top_rated`,
-      {headers:this.httpHeaders, params: this.httpParams}
+      {headers:this.httpHeaders, params: {page} }
     )
   }
 }

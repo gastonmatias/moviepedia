@@ -1,32 +1,10 @@
-<!-- <div class="grid" *ngFor="let item of mediaItems">
-    <div class="col-4">
-        <img
-            [src]="'https://image.tmdb.org/t/p/w500/'+item.poster_path" 
-            alt="item.title"
-            width="250"
-        />
-    </div>
-</div> -->
-<!-- <div class="flex justify-content-center" *ngFor="let item of mediaItems"> -->
-<!-- <div class="flex justify-content-center"> -->
-<div class="grid">
-    <!-- <div class="card flex justify-content-center col-4"> -->
-    <!-- <div class="card col-4 sm:col-3 md:col-2 gap-0 m-0 border border-1" -->
-    <div class="card col-4 sm:col-3 md:col-2 "
-        *ngFor="let item of mediaItems"
-        >
+
+<div class="grid grid-nogutter justify-content-center">
+    <div class="col-4 sm:col-3 md:col-3 lg:col-2 lg:m-1" *ngFor="let item of mediaItems">
         <p-image
             [src]="'https://image.tmdb.org/t/p/w500/'+item.poster_path" 
             alt="item.title"
-            width="100%"
-            [preview]="false"
-            [previewImageSrc]="'https://image.tmdb.org/t/p/w500/'+item.backdrop_path"
-            class="col-3 gap-0 m-0"
-        >
-        <ng-template pTemplate="indicator">
-            <i class="pi pi-check"></i>
-        </ng-template>
-        </p-image>
+            width="95%"
+        />
     </div>
 </div>
-<!-- width="250" -->

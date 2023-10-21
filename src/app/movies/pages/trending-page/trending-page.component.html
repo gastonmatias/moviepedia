@@ -1,0 +1,22 @@
+<div class="grid  justify-content-center">
+
+    <h1 class="justify-self-end">Trending</h1>
+
+    <shared-media-gallery
+        [mediaItems]="trendingMovies"
+        
+    />
+
+    <!-- <shared-paginator
+        [dataApiResponse]="trendingMovies"
+        (mediaGalleryChangePage)="onChangePage($event)"
+    /> -->
+    <!-- [totalRecords]="trendingMovies.results.length" -->
+    <!-- [rows]="trendingMovies.results" -->
+    <shared-paginator
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        (paginatorChangePage)="onChangePage($event)"
+    />
+    
+</div>

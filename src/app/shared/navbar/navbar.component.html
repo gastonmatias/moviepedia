@@ -1,16 +1,21 @@
-    <p-menubar
-        [style]="{'background-color': '#02021C'}"
-        [model]="items"
-        routerLink
-    >
-        <ng-template pTemplate="start">
-            <!-- <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" /> -->
-            <i class="pi pi-video" [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}">
-                <span class="ml-2">Moviepedia</span>
-            </i>
-        </ng-template>
+<p-menubar
+    [style]="{ 'background-color': '#02021C', 'border-radius': 0}"
+    [model]="items"
+    [routerLink]
+    class="navbar"
+>
+    <ng-template pTemplate="start">
+        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="25" class="" />
+        <!-- <i class="pi pi-video" [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}">
+        </i> -->
+        <!-- <h2 class="ml-6 mr-20 inline"> -->
+        <h2 class="inline" [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}">
+            MOVIEPEDIA
+        </h2>
+    </ng-template>
 
-        <ng-template pTemplate="end">
-            <input type="text" pInputText placeholder="Search" class="w-full" />
-        </ng-template>
-    </p-menubar>
+    <ng-template pTemplate="end">
+        <input type="text" pInputText placeholder="Search" class="w-full" />
+    </ng-template>
+
+</p-menubar>

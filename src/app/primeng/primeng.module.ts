@@ -14,6 +14,8 @@ import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
+import { PaginatorModule } from 'primeng/paginator';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [],
@@ -31,7 +33,9 @@ import { CardModule } from 'primeng/card';
     GalleriaModule,
     CarouselModule,
     ImageModule,
-    CardModule
+    CardModule,
+    PaginatorModule,
+    ProgressSpinnerModule
   ]
 })
 export class PrimengModule { }

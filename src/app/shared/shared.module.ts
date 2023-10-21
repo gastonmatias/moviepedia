@@ -6,11 +6,15 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Router, RouterLink } from '@angular/router';
 import { MediaGalleryComponent } from './components/media-gallery/media-gallery.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    MediaGalleryComponent
+    MediaGalleryComponent,
+    PaginatorComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { MediaGalleryComponent } from './components/media-gallery/media-gallery.
   ],
   exports:[
     NavbarComponent,
-    MediaGalleryComponent
+    MediaGalleryComponent,
+    PaginatorComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

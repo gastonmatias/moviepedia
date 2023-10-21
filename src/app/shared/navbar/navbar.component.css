@@ -1,0 +1,8 @@
+.navbar {
+    position: sticky; /* Fija la barra de navegación en la parte superior */
+    position: -webkit-sticky;  /*Needed for Safari browsers.*/
+    z-index: 10000;  /*se utiliza para controlar la posición en el eje Z (profundidad). This prevents elements to be seen through the toolbar.*/
+    top: 0;  /*Required for "position: sticky" to take effect.*/
+    border-radius: 0;
+    background-color: #02021C; 
+}
