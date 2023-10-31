@@ -18,19 +18,19 @@ export class NavbarComponent implements OnInit {
           {
               label: 'Trending',
               icon: 'pi pi-fw pi-bolt',
-              url: 'movies/trending'
+              routerLink: 'movies/trending'
           },
           {
               label: 'Popular',
-            //   icon: 'pi pi-fw pi-thumbs-up-fill',
+              // icon: 'pi pi-fw pi-thumbs-up-fill',
               icon: 'pi pi-fw pi-thumbs-up',
-              url: 'movies/popular'
+              routerLink: 'movies/popular'
           },
           {
               label: 'Best Rated',
-            //   icon: 'pi pi-fw pi-star-fill',
+              // icon: 'pi pi-fw pi-star-fill',
               icon: 'pi pi-fw pi-star',
-              url: 'movies/best-rated'
+              routerLink: 'movies/best-rated'
           },
 
       ];
