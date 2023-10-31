@@ -1,12 +1,10 @@
-<div class="justify-content-c">
+<div class="justify-content-center">
 <p-carousel
     [value]="mediaArray"
-    [numVisible]="6"
-    [numScroll]="1"
+    
     [responsiveOptions]="responsiveOptionsCarousel"
     [showIndicators]="false"
-    [circular]="false"
-    [autoplayInterval]="6000000000"
+    [circular]="true"
     >
 
     <ng-template pTemplate="header" class="header-carousel m-0 p-0">

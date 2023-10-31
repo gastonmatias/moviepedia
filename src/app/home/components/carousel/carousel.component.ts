@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MovieService } from '../../../movies/movies.service';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -16,51 +14,41 @@ export class CarouselComponent {
   @Input()
   title = ''
 
-  responsiveOptions: any[] = [
-      {
-          breakpoint: '1024px',
-          numVisible: 5
-      },
-      {
-          breakpoint: '768px',
-          numVisible: 3
-      },
-      {
-          breakpoint: '560px',
-          numVisible: 1
-      }
-  ];
-
   responsiveOptionsCarousel = [
+    {
+        breakpoint: '3000px',
+        numVisible: 6,
+        numScroll: 6
+    },
     {
         breakpoint: '1400px',
         numVisible: 6,
-        numScroll: 1
+        numScroll: 6
     },
     {
         breakpoint: '1220px',
         numVisible: 6,
-        numScroll: 1
+        numScroll: 6
     },
     {
         breakpoint: '1100px',
         numVisible: 5,
-        numScroll: 1
+        numScroll: 5
     },
     {
         breakpoint: '800px',
         numVisible: 3,
-        numScroll: 1
+        numScroll: 3
     },
     {
         breakpoint: '700px',
         numVisible: 3,
-        numScroll: 1
+        numScroll: 3
     },
     {
         breakpoint: '500px',
         numVisible: 2,
-        numScroll: 1
+        numScroll: 2
     },
     {
         breakpoint: '400px',
