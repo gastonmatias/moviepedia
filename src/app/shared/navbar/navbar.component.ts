@@ -35,4 +35,8 @@ export class NavbarComponent implements OnInit {
 
       ];
   }
+
+  onClickSearch () {
+    alert('Componente SEARCH en construcción!\nGracias por su paciencia :)')
+  }
 }

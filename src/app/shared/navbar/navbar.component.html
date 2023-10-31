@@ -21,7 +21,13 @@
     </ng-template>
 
     <ng-template pTemplate="end">
-        <input type="text" pInputText placeholder="Search" class="w-full" />
+        <input
+            type="text"
+            pInputText
+            placeholder="Search"
+            class="w-full"
+            (click)="onClickSearch()"
+        />
     </ng-template>
 
 </p-menubar>
