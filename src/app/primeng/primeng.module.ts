@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { MenubarModule } from 'primeng/menubar';
 
 import { StyleClassModule } from 'primeng/styleclass';
 import { DividerModule } from 'primeng/divider';
-import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -16,6 +14,7 @@ import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [],
@@ -35,7 +34,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ImageModule,
     CardModule,
     PaginatorModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ChipModule
   ]
 })
 export class PrimengModule { }

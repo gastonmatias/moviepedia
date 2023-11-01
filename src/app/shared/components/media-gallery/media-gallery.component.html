@@ -5,6 +5,8 @@
             [src]="'https://image.tmdb.org/t/p/w500/'+item.poster_path" 
             alt="item.title"
             width="95%"
+            class="gallery-item"
+            (click)="onImageClick(item)"
         />
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemoviedbService } from '../../../themoviedb/themoviedb.service';
+import { MovieListItem } from 'src/app/movies/interfaces/movieList';
 
 @Component({
   templateUrl: './home-page.component.html',
@@ -8,9 +9,9 @@ import { ThemoviedbService } from '../../../themoviedb/themoviedb.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public trendingMovies = []
-  public popularMovies = []
-  public topRatedMovies = []
+  public trendingMovies:MovieListItem[] = []
+  public popularMovies:MovieListItem[] = []
+  public topRatedMovies:MovieListItem[] = []
 
   constructor(
     private themoviedbService: ThemoviedbService 

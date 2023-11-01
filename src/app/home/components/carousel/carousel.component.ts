@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { MovieDetail } from 'src/app/movies/interfaces/movieDetail';
+import { MovieListItem } from 'src/app/movies/interfaces/movieList';
 
 @Component({
   selector: 'app-carousel',
@@ -6,15 +9,15 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent {
-  images: any[] = [];
+    images: any[] = [];
 
-  @Input()
-  mediaArray = []
-  
-  @Input()
-  title = ''
+    @Input()
+    mediaArray:MovieListItem[] = []
+    
+    @Input()
+    title = ''
 
-  responsiveOptionsCarousel = [
+    responsiveOptionsCarousel = [
     {
         breakpoint: '3000px',
         numVisible: 6,
@@ -55,9 +58,13 @@ export class CarouselComponent {
         numVisible: 1,
         numScroll: 1
     }
-];
+    ];
 
-    onClickImage(item:object){
-        console.log({item});
+    constructor ( 
+        private router: Router 
+    ) {}
+
+    onClickCarouselItem(item:MovieDetail){
+        this.router.navigate([`/movies/${item.id}`])
     }
 }

@@ -8,13 +8,15 @@ import { Router, RouterLink } from '@angular/router';
 import { MediaGalleryComponent } from './components/media-gallery/media-gallery.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { MinutesToTimePipe } from './pipes/minutes-to-time.pipe';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     MediaGalleryComponent,
     PaginatorComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MinutesToTimePipe
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NavbarComponent,
     MediaGalleryComponent,
     PaginatorComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MinutesToTimePipe
   ]
 })
 export class SharedModule { }

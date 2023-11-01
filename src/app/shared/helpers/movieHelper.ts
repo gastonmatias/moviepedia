@@ -1,4 +1,4 @@
-import { MovieAPIResponse, MoviePageType } from "src/app/movies/interfaces/movie"
+import { MovieAPIResponse, MoviePageType } from "src/app/movies/interfaces/movieList"
 
 
 export const setPaginatorProperties = (apiResponse:MovieAPIResponse) => {

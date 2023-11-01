@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ThemoviedbService } from 'src/app/themoviedb/themoviedb.service';
-import { Movie, MovieAPIResponse, MoviePageType } from '../../interfaces/movie';
+import { MovieListItem, MovieAPIResponse, MoviePageType } from '../../interfaces/movieList';
 import * as movieHelper from 'src/app/shared/helpers/movieHelper';
 
 @Component({
@@ -10,7 +10,7 @@ import * as movieHelper from 'src/app/shared/helpers/movieHelper';
 })
 export class GenericPageComponent implements OnInit {
   
-  public movies: Movie[] = [];
+  public movies: MovieListItem[] = [];
   public page: number = 1;
   public totalRecords: number = 20;
   public rows: number = 0;

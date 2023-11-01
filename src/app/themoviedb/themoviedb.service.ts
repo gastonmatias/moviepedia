@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { MovieAPIResponse } from '../movies/interfaces/movieList';
+import { MovieDetail } from '../movies/interfaces/movieDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -21,26 +23,33 @@ export class ThemoviedbService {
 
   constructor(private httpClient:HttpClient) {}
   
-  getTrendingMovies( page:number = 1 ):Observable<any> {
+  getTrendingMovies( page:number = 1 ):Observable<MovieAPIResponse> {
 
-    return this.httpClient.get(
+    return this.httpClient.get<MovieAPIResponse>(
       `${this.base_url}/trending/movie/week`,
       // { headers:this.httpHeaders, params: this.httpParams }
       { headers:this.httpHeaders, params:{page} }
     )
   }
   
-  getPopularMovies(page:number = 1):Observable<any> {
-    return this.httpClient.get(
+  getPopularMovies(page:number = 1):Observable<MovieAPIResponse> {
+    return this.httpClient.get<MovieAPIResponse>(
       `${this.base_url}/movie/popular`,
       {headers:this.httpHeaders, params: {page} }
     )
   }
   
-  getTopRatedMovies(page:number = 1):Observable<any> {
-    return this.httpClient.get(
+  getTopRatedMovies(page:number = 1):Observable<MovieAPIResponse> {
+    return this.httpClient.get<MovieAPIResponse>(
       `${this.base_url}/movie/top_rated`,
       {headers:this.httpHeaders, params: {page} }
+    )
+  }
+  
+  getMovieById(id:number):Observable<MovieDetail> {
+    return this.httpClient.get<MovieDetail>(
+      `${this.base_url}/movie/${id}`,
+      {headers:this.httpHeaders }
     )
   }
 }

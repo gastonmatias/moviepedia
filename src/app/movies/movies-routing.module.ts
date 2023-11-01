@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TrendingPageComponent } from './pages/trending-page/trending-page.component';
-import { PopularPageComponent } from './pages/popular-page/popular-page.component';
-import { BestRatedPageComponent } from './pages/best-rated-page/best-rated-page.component';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
+import { MovieDetailPageComponent } from './pages/movie-detail-page/movie-detail-page.component';
 
-const routes: Routes = [
+const routes: Routes = [ // www.screenpedia.com/movies/...
   { 
     path:'trending', 
     component:GenericPageComponent,
@@ -21,17 +19,16 @@ const routes: Routes = [
     component:GenericPageComponent,
     data: { pageType:'best-rated'} 
   },
+  { 
+    path:':id', 
+    component:MovieDetailPageComponent,
+    data: { pageType:'movie-detail'} 
+  },
   {
     path: '**',
     redirectTo: 'trending'
   }
 ];
-
-// const routes: Routes = [
-//   { path:'trending', component:TrendingPageComponent },
-//   { path:'popular', component:PopularPageComponent },
-//   { path:'best-rated', component:BestRatedPageComponent },
-// ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

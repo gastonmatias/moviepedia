@@ -1,20 +1,81 @@
-<!-- <div class="card flex justify-content-center">
-    <p-card
-        [header]="title"
-        [subheader]="vote_average" 
-        [style]="{ width: '360px' }"
-    >
-        <ng-template pTemplate="header">
-            <img 
-                alt="Card" 
-                [src]="'https://image.tmdb.org/t/p/w500/'+poster_path" 
-            />
-        </ng-template>
-        <p>{{overview}}</p>
-        <p>{{release_date}}</p>
-        <ng-template pTemplate="footer">
-            <p-button label="More info" icon="pi pi-external-link"></p-button>
-            <p-button label="More info" icon="pi pi-external-link" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
-        </ng-template>
-    </p-card>
-</div> -->
+<div class="grid grid-nogutter gap-0 sm:gap-2 md:gap-5 flex justify-content-center align-content-start card pt-5" *ngIf="movie">
+    <div class="card flex justify-content-center col-12 sm:col-5 md:col-4">
+        <p-image
+            [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path" 
+            [previewImageSrc]="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" 
+            alt="Image"
+            width="100%"
+            [preview]="true">
+        </p-image>
+    </div>
+    
+    <div class="col-12 sm:col-6 md:col-4">
+        <p-card
+        [header]="movie.original_title"
+        [style]="{'background-color':'#1E1E1E'}"
+        >
+            <ng-template pTemplate="title">
+                <p  class="font-bold text-lg">{{movie.vote_average | number:'1.1-1'}}
+                    <i class="pi pi-star-fill text-yellow-400"></i>
+                </p>
+            </ng-template>
+
+            <ng-template pTemplate="subtitle">
+                <h3 class="font-semibold text-lg text-indigo-100 font-italic pt-3 mb-0 pb-0">"{{movie.tagline}}"</h3>
+            </ng-template>
+            
+            <ng-template pTemplate="content" >
+                <h4 class="text-base font-light pt-0 mt-0">{{movie.overview}}</h4>
+                <div class="card flex align-items-center gap-2 flex-wrap">
+                    <ng-container *ngFor="let genre of movie.genres">
+                        <p-chip [style]="{'background-color':'#CBD5E1'}">
+                            <div class="p-2 text-black-alpha-80 font-bold">
+                                {{genre.name}}
+                            </div>
+                        </p-chip>
+                    </ng-container>
+                    
+                </div>
+                
+                <p-divider class="bg-gray-900"></p-divider>
+                <p>Release Date: {{movie.release_date | date}}</p>
+                <p-divider class="bg-gray-900"></p-divider>
+                <p>Status: {{movie.status}}</p>
+                <p-divider class="bg-gray-900"></p-divider>
+                <p>Duration: {{movie.runtime | minutesToTime}} minutes</p>
+
+            </ng-template>
+            
+            <ng-template pTemplate="footer">
+
+                <div class="flex gap-2 justify-content-end">
+                    <ng-container *ngIf="movie.homepage !== ''" >
+                        <a [href]="movie.homepage" target="_blank" class="gap-3">
+                            <p-button
+                                label="Official Site"
+                                icon="pi pi-external-link"
+                                styleClass="p-button-secondary" 
+                                [style]="{ 'margin-left': '.0em' }"
+                                
+                            />
+                        </a>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="movie.imdb_id !== ''">
+                        <a [href]="'https://www.imdb.com/title/'+ movie.imdb_id" target="_blank">
+                            <p-button
+                                label="See on IMDb"
+                                icon="pi pi-external-link"
+                                styleClass="p-button" 
+                                [style]="{ 'margin-left': '.0em' }"
+                                
+                            />
+                        </a>
+                    </ng-container>
+                </div>
+            </ng-template>
+        
+        </p-card>
+    </div>
+</div>
+

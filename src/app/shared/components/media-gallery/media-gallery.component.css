@@ -1,0 +1,16 @@
+.gallery-item {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    /* max-width: 90%; */
+    /* transición para suavizar el cambo */
+    transition: filter 0.3s; 
+}
+
+.gallery-item:hover {
+    filter: brightness(2.3); 
+    filter: saturate(1.2);
+    filter: contrast(1.2);
+    transform: scale(1.5);
+    
+    
+    cursor: pointer;
+}

@@ -1,11 +1,11 @@
 export interface MovieAPIResponse {
     page:          number;
-    results:       Movie[];
+    results:       MovieListItem[];
     total_pages:   number;
     total_results: number;
 }
 
-export interface Movie {
+export interface MovieListItem {
     adult:             boolean;
     backdrop_path:     string;
     id:                number;
