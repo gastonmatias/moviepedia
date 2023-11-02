@@ -2,7 +2,7 @@
     [style]="{ 
         'background-color': '#02021C', 
         'border-radius': 0,
-        'padding':'0.4rem 1.3rem',
+        'padding':'0.5rem 1.3rem',
         'display':'flex',
         'justify-content':'space-between'
     }"
@@ -11,23 +11,31 @@
     class="navbar"
 >
     <ng-template pTemplate="start">
-        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="25" class="" />
-        <!-- <i class="pi pi-video" [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}">
-        </i> -->
-        <!-- <h2 class="ml-6 mr-20 inline"> -->
-        <h2 class="inline" [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}">
-            MOVIEPEDIA
-        </h2>
+        <!-- <div [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}" class="flex align-items-center my-0 py-0"> -->
+        <div [routerLink]="['/']" [ngStyle]="{'cursor':'pointer'}" class="">
+            <i
+                class="fa-sharp fa-solid fa-film fa-2xl mr-2" 
+                style="color: #929197;">
+            </i>
+            <h2 class="hidden sm:inline">
+                MOVIEPEDIA
+            </h2>
+        </div>
     </ng-template>
 
     <ng-template pTemplate="end">
-        <input
-            type="text"
-            pInputText
-            placeholder="Search"
-            class="w-full"
-            (click)="onClickSearch()"
-        />
+        <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input
+                id="search"
+                class="py-1"
+                type="text"
+                (click)="onClickSearch()"
+                placeholder="search"
+                type="text"
+                pInputText
+            />
+        </span>
     </ng-template>
 
 </p-menubar>

@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
       this.items = [
           {
               label: 'Trending',
+              // icon: 'fa-regular fa-fire',
               icon: 'pi pi-fw pi-bolt',
               routerLink: 'movies/trending'
           },
