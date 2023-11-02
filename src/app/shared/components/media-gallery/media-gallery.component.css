@@ -10,7 +10,27 @@
     filter: saturate(1.2);
     filter: contrast(1.2);
     transform: scale(1.5);
-    
-    
     cursor: pointer;
 }
+
+.gallery-container{
+    margin: 0.3rem 0.3rem;
+}
+/* en caso futuro para previewImage = true */
+/* .p-image{
+    background-color: black;
+    filter: brightness(2.3);
+    cursor: pointer;
+}
+
+.p-image-preview-container{
+    background-color: black;
+    filter: brightness(2.3);
+    cursor: pointer;
+}
+
+.p-image-preview{
+    background-color: black;
+    filter: brightness(2.3);
+    cursor: pointer;
+} */
