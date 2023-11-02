@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemoviedbService } from 'src/app/themoviedb/themoviedb.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from '../../interfaces/movieDetail';

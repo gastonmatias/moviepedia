@@ -1,18 +1,20 @@
 <div class="grid grid-nogutter gap-0 sm:gap-2 md:gap-5 flex justify-content-center align-content-start card pt-5" *ngIf="movie">
-    <div class="card flex justify-content-center col-12 sm:col-5 md:col-4">
+    
+    <!--! IMAGEN -->
+    <div class="card flex justify-content-center col-12 sm:col-5 md:col-5">
         <p-image
             [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path" 
-            [previewImageSrc]="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" 
-            alt="Image"
+            [alt]="movie.original_title"
             width="100%"
-            [preview]="true">
+            >
         </p-image>
-    </div>
+    </div><!--! END IMAGEN -->
     
-    <div class="col-12 sm:col-6 md:col-4">
+    <!-- !CARD DESCRIPCION -->
+    <!-- [style]="{'background-color':'#1E1E1E'}" -->
+    <div class="col-12 sm:col-6 md:col-6 lg:col-5 xl:col-4">
         <p-card
         [header]="movie.original_title"
-        [style]="{'background-color':'#1E1E1E'}"
         >
             <ng-template pTemplate="title">
                 <p  class="font-bold text-lg">{{movie.vote_average | number:'1.1-1'}}
@@ -37,12 +39,37 @@
                     
                 </div>
                 
+                <!-- <p-divider class="border-green-50"></p-divider> -->
+                <p-divider [style]="{'border':'1px 1px white'}"></p-divider>
+                <p>
+                    <i class="fa-solid fa-language text-indigo-200 mr-2"></i>
+                    {{movie.original_language | uppercase}}
+                </p>
+                
                 <p-divider class="bg-gray-900"></p-divider>
-                <p>Release Date: {{movie.release_date | date}}</p>
+                <p>
+                    <i class="fa-regular fa-calendar-days text-indigo-200 mr-2"></i>
+                    {{movie.release_date | date}}
+                </p>
+                
                 <p-divider class="bg-gray-900"></p-divider>
-                <p>Status: {{movie.status}}</p>
-                <p-divider class="bg-gray-900"></p-divider>
-                <p>Duration: {{movie.runtime | minutesToTime}} minutes</p>
+                <p>
+                    <i class="fa-solid fa-rocket text-indigo-200 mr-2"></i>
+                    Status: {{movie.status}}
+                </p>
+                
+                <p-divider class="text-indigo-200"></p-divider>
+                <p pTooltip="Duration" tooltipPosition="left">
+                    <i class="fa-regular fa-clock text-indigo-200 mr-2"></i>
+                    {{movie.runtime | minutesToTime}} minutes
+                </p>
+                
+                <p-divider class="text-indigo-200"></p-divider>
+                <i class="fa-solid fa-industry text-indigo-200 mr-2"></i>
+                
+                <p *ngFor="let companie of movie.production_companies;let last=last" class="inline">
+                    {{companie.name}}{{last? '':', '}}
+                </p>
 
             </ng-template>
             
@@ -54,28 +81,23 @@
                             <p-button
                                 label="Official Site"
                                 icon="pi pi-external-link"
-                                styleClass="p-button-secondary" 
-                                [style]="{ 'margin-left': '.0em' }"
-                                
+                                styleClass="p-button-info" 
                             />
                         </a>
                     </ng-container>
                     
                     <ng-container *ngIf="movie.imdb_id !== ''">
                         <a [href]="'https://www.imdb.com/title/'+ movie.imdb_id" target="_blank">
-                            <p-button
-                                label="See on IMDb"
-                                icon="pi pi-external-link"
-                                styleClass="p-button" 
-                                [style]="{ 'margin-left': '.0em' }"
-                                
-                            />
+                            <p-button outlined="true" severity="danger" styleClass="p-button-warning" >
+                                <span class="ml-2 mr-2 font-bold">See On </span>
+                                <i class="fa-brands fa-imdb fa-2xl"></i>
+                            </p-button>
                         </a>
                     </ng-container>
                 </div>
             </ng-template>
         
         </p-card>
-    </div>
+    </div> <!-- !END CARD DESCRIPCION -->
 </div>
 
