@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { SearchService } from '../../movies/pages/search/search.service';
 
 @Component({
   selector: 'shared-navbar',
@@ -11,7 +12,12 @@ export class NavbarComponent implements OnInit {
 
   items: MenuItem[] | undefined;
 
-  constructor( public router: Router) { }
+  public searchTerm: string = '';
+
+  constructor( 
+    public router: Router,
+    private searchService:SearchService
+  ) { }
 
   ngOnInit() {
       this.items = [
@@ -37,7 +43,12 @@ export class NavbarComponent implements OnInit {
       ];
   }
 
-  onClickSearch () {
-    alert('Componente SEARCH en construcción!\nGracias por su paciencia :)')
+  onSearch (ev: KeyboardEvent | MouseEvent ) {
+    // Si es un KeyboardEvent y la tecla es 'Enter' o es un MouseEvent y el tipo es 'click'
+    if ((ev as KeyboardEvent).key==='Enter' || (ev as MouseEvent).type==='click') {
+      this.searchService.setSearchTerm(this.searchTerm) // setea el serchTerm
+      this.router.navigate([`/movies/search`]) //redirige a pagina search
+    }
   }
+
 }

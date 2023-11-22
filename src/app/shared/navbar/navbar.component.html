@@ -25,15 +25,16 @@
 
     <ng-template pTemplate="end">
         <span class="p-input-icon-right">
-            <i class="pi pi-search"></i>
+            <i class="pi pi-search" (click)="onSearch($event)" [style]="{'cursor':'pointer'}"></i>
             <input
                 id="search"
                 class="py-1"
                 type="text"
-                (click)="onClickSearch()"
+                (keydown)="onSearch($event)"
                 placeholder="search"
                 type="text"
                 pInputText
+                [(ngModel)]="searchTerm"
             />
         </span>
     </ng-template>

@@ -1,0 +1,51 @@
+<div class="grid grid-nogutter justify-content-center" >
+    
+    <!-- ! TITULO -->
+    <div class="col-12 text-center">
+        <h2 class="">
+            Search Results
+        </h2>
+    </div>
+    
+    <!--! MSJES DE VALIDACION BUSQEUDA -->
+    <div class="col-7 text-center justify-content-center text-center">
+        <p-messages *ngIf="movies.length===0 && searchTerm!='' && isLoading===false"
+            [value]="[{ severity: 'error', summary: 'Oops!', detail: 'No movies were found with the search term' }]"
+            [enableService]="false"
+        />
+        
+        <p-messages *ngIf="searchTerm===''"
+            [value]="[{ severity: 'info', summary: 'Please', detail: 'Enter a search term and press ENTER' }]"
+            [enableService]="false"
+            [closable]="false"
+        />
+    </div>
+    
+    <!-- TODO: FILTERS -->
+    <!-- TODO: vote_average, year, language, adult -->
+    <div class="col-12">
+
+    </div>
+
+    <!--! GALERIA DE RSULTADOS -->
+    <div  [style]="{'min-height':'75vh','min-width':'75vw'}" class="">
+        <shared-media-gallery
+            [mediaItems]="movies"
+            *ngIf="movies.length>0 && !isLoading"
+        />
+        
+        <shared-spinner *ngIf="isLoading"/>
+    </div>
+
+    <!--! PAGINADOR -->
+    <div *ngIf="searchTerm!='' && movies.length>0" class="align-self-end col-12 sm:col-11 md:col-10 lg:col-6">
+        <shared-paginator
+            [rows]="rows"
+            [totalRecords]="totalRecords"
+            (paginatorChangePage)="onChangePage($event)"
+        />
+    </div>
+
+    
+</div>
+

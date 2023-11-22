@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { MovieDetailPageComponent } from './pages/movie-detail-page/movie-detail-page.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [ // www.screenpedia.com/movies/...
   { 
@@ -18,6 +19,10 @@ const routes: Routes = [ // www.screenpedia.com/movies/...
     path:'best-rated', 
     component:GenericPageComponent,
     data: { pageType:'best-rated'} 
+  },
+  { 
+    path:'search', // search antes de ":id" para evitar solapacion
+    component:SearchComponent,
   },
   { 
     path:':id', 

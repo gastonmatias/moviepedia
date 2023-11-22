@@ -15,6 +15,8 @@ import { CardModule } from 'primeng/card';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChipModule } from 'primeng/chip';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [],
@@ -35,7 +37,10 @@ import { ChipModule } from 'primeng/chip';
     CardModule,
     PaginatorModule,
     ProgressSpinnerModule,
-    ChipModule
+    ChipModule,
+    ScrollPanelModule,
+    MessagesModule
+    
   ]
 })
 export class PrimengModule { }
