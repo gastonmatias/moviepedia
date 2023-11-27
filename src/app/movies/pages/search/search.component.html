@@ -10,21 +10,50 @@
     <!--! MSJES DE VALIDACION BUSQEUDA -->
     <div class="col-7 text-center justify-content-center text-center">
         <p-messages *ngIf="movies.length===0 && searchTerm!='' && isLoading===false"
-            [value]="[{ severity: 'error', summary: 'Oops!', detail: 'No movies were found with the search term' }]"
+            [value]="[{ severity: 'error', summary: 'Oops!', detail: 'No movies were found with the search params' }]"
             [enableService]="false"
         />
         
         <p-messages *ngIf="searchTerm===''"
             [value]="[{ severity: 'info', summary: 'Please', detail: 'Enter a search term and press ENTER' }]"
             [enableService]="false"
-            [closable]="false"
+            [closable]="true"
         />
     </div>
     
-    <!-- TODO: FILTERS -->
-    <!-- TODO: vote_average, year, language, adult -->
-    <div class="col-12">
+    <!--! FILTERS -->
+    <div
+        class="flex col-12 justify-content-center text-center gap-4"
+    >
+        <!-- ! FILTRO ADULT -->
+        <!-- [(formControl)]="includeAdult" -->
+        <!-- [trueValue]="includeAdult"
+            [falseValue]="!includeAdult" -->
+            <p-checkbox
+            [(ngModel)]="includeAdult"
+            [value]="includeAdult"
+            name="adult"
+            [binary]="true"
+            label="Include Adult?"
+            (onChange)="onChangeAdultFilter($event)"
+        />
 
+        <!-- ! FILTRO YEAR -->
+        <p-calendar
+            [(ngModel)]="year"
+            view="year" 
+            dateFormat="yy"
+            value="2023"
+            inputId="yearpicker"
+            selectionMode="single"
+            [hideOnDateTimeSelect]="true"
+            placeholder="Year"
+            [showIcon]="true"
+            [readonlyInput]="true"
+            (onSelect)="onFilterYearChange($event)"
+            (onClear)="onClearYearFilter()"
+            [showClear]="true"
+        />
     </div>
 
     <!--! GALERIA DE RSULTADOS -->

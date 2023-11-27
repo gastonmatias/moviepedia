@@ -17,6 +17,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChipModule } from 'primeng/chip';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { MessagesModule } from 'primeng/messages';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -39,7 +42,10 @@ import { MessagesModule } from 'primeng/messages';
     ProgressSpinnerModule,
     ChipModule,
     ScrollPanelModule,
-    MessagesModule
+    MessagesModule,
+    MultiSelectModule,
+    CalendarModule,
+    CheckboxModule
     
   ]
 })

@@ -6,18 +6,21 @@ import { SharedModule } from '../shared/shared.module';
 import { MovieDetailPageComponent } from './pages/movie-detail-page/movie-detail-page.component';
 import { GenericPageComponent } from './pages/generic-page/generic-page.component';
 import { PrimengModule } from '../primeng/primeng.module';
-
+import { SearchComponent } from './pages/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     MovieDetailPageComponent,
-    GenericPageComponent
+    GenericPageComponent,
+    SearchComponent,
   ],
   imports: [
     SharedModule,
     CommonModule,
     MoviesRoutingModule,
-    PrimengModule
+    PrimengModule,
+    FormsModule
   ]
 })
 export class MoviesModule { }

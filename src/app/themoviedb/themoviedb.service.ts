@@ -54,10 +54,19 @@ export class ThemoviedbService {
     )
   }
   
-  searchMoviesByTerm(searchTerm:string, page:number = 1):Observable<any> {
+  searchMoviesByTerm(
+    searchTerm:string, page:number = 1, year:string='',include_adult:boolean=false
+  ):Observable<any> {
     return this.httpClient.get<any>(
-      `${this.base_url}/search/movie`,
-      {headers:this.httpHeaders, params: {page, query:searchTerm} }
+      `${this.base_url}/search/movie`, {
+        headers:this.httpHeaders, 
+        params: {
+          page, 
+          query:searchTerm, 
+          include_adult, 
+          primary_release_year:year
+        } 
+      }
     )
   }
 }
