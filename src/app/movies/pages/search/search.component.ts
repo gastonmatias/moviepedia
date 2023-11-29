@@ -8,13 +8,11 @@ import { format } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import {Location} from '@angular/common';
-// import { PaginatorService } from '../../../shared/components/paginator/paginator.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styles: [
-  ]
 })
 export class SearchComponent implements OnInit {
 
@@ -23,32 +21,41 @@ export class SearchComponent implements OnInit {
   public page: number = 1;
   public totalRecords: number = 20;
   public rows: number = 0;
+  public first: number = 0;
   
   public isLoading:boolean = false
   public messages: Message[] =[];
 
-  // obs antes de props filters
+  // obs para manejar el search qe provee el servicio searchService
   private searchTermSubscription!: Subscription;
-  private yearSubscription!: Subscription;
-  private includeAdultSubscription!: Subscription;
-  // private pageSubscription!: Subscription;
 
   // filters
   public searchTerm:string = ''
-  public year = ''
-  public includeAdult = false
+  public year:string = ''
+  public includeAdult:boolean = false
   
   constructor(
-    private searchService: SearchService,
     private themoviedbService:ThemoviedbService,
     private _location: Location,
-    // private paginatorService: PaginatorService,
+    private activatedRoute:ActivatedRoute,
+    private searchService:SearchService
   ){}
 
   ngOnInit(): void {
-    this.yearSubscription = this.searchService.yearFilter$.subscribe( year => this.year = year )
-    this.includeAdultSubscription = this.searchService.includeAdultFilter$.subscribe( adult => this.includeAdult = adult )
-    // this.pageSubscription = this.paginatorService.actualPage$.subscribe(resp => this.page = resp)
+    //! obtener page y first desde query params
+    this.activatedRoute.queryParams.subscribe( params => {
+      const pageParam = params['page']
+      const firstParam = params['first']
+      const yearParam = params['year']
+      const includeAdultParam = params['includeAdult']
+      
+      this.page = +pageParam
+      this.first = +firstParam
+      this.year = yearParam
+      this.includeAdult = includeAdultParam==='true' ? true : false
+    })
+    
+    //! filtro searchterm + exec api call
     this.searchTermSubscription = this.searchService.searchTerm$.subscribe( resp => { 
       this.searchTerm = resp 
       this.searchMovies()
@@ -58,6 +65,8 @@ export class SearchComponent implements OnInit {
   updateURLWithNewParamsWithoutReloading() {
     const params = new HttpParams().appendAll({
       q: this.searchTerm,
+      page: this.page,
+      first: this.first,
       year: this.year,
       includeAdult: this.includeAdult
     });
@@ -69,49 +78,53 @@ export class SearchComponent implements OnInit {
   } 
 
   searchMovies(){
-
     const sanitizedSearchTerm = this.searchTerm.trim()
     if (sanitizedSearchTerm.length===0) return;
 
     this.isLoading = true
+
     this.themoviedbService.searchMoviesByTerm(sanitizedSearchTerm, this.page,this.year,this.includeAdult)
       .subscribe(resp => {
-      console.log(resp);
       this.movies = resp.results
       const {totalRecords, rows} = movieHelper.setPaginatorProperties(resp) 
       this.totalRecords = totalRecords
       this.rows = rows
       this.isLoading = false
     })
-
-    this.updateURLWithNewParamsWithoutReloading()
     
+    this.updateURLWithNewParamsWithoutReloading()
   }
   
-  onChangePage(page: number) {
-    this.page = page;
-    // this.paginatorService.setPage(page)
+  onChangePage(event: any) {
+    this.page = event.page+1 // +1 pq paginator de ngprime comienza en 0k
+    this.first = event.first
     this.searchMovies()
   }
 
-  onFilterYearChange(e:any){
-    this.page = 1;
-    const formattedYear = format(e, 'yyyy');
-    this.searchService.setYear(formattedYear)
-    this.searchMovies()
-  }
-  
   onChangeAdultFilter(event:any){
     let adultChecked:boolean 
     event.checked ? adultChecked = true: adultChecked = false
-    this.searchService.setIncludeAdult(adultChecked)
+    this.includeAdult = adultChecked
+    this.resetPageAndFirst()
+    this.searchMovies()
+  }
+  
+  onFilterYearChange(e:any){
+    this.resetPageAndFirst()
+    const formattedYear = format(e, 'yyyy');
+    this.year = formattedYear
     this.searchMovies()
   }
 
   onClearYearFilter(){
-    this.page = 1;
-    this.searchService.setYear('')
+    this.resetPageAndFirst()
+    this.year = ''
     this.searchMovies()    
+  }
+
+  resetPageAndFirst(){
+    this.page = 1
+    this.first = 0
   }
 
   ngOnDestroy(): void {
@@ -119,26 +132,5 @@ export class SearchComponent implements OnInit {
     if (this.searchTermSubscription) {
       this.searchTermSubscription.unsubscribe();
     }
-    if (this.yearSubscription) {
-      this.yearSubscription.unsubscribe();
-    }
-    if (this.includeAdultSubscription) {
-      this.includeAdultSubscription.unsubscribe();
-    }
   }
-
-  // //! OJO: filtra SOLO PAGINA ACTUAL, de qerer persistir debera persistir este filtro al pasar a otra pagina
-  // onFilterLanguageChange(e:any){
-  //   this.page = 1; // al cambiar filtro, volver a pagina 1 del paginator
-
-  //   // se crea lista con languages seleccionados
-  //   const allowedLanguages = e.value.map((e:any) => e.code)
-
-  //   // filtra movies array con "original_language" dentro de languages seleccionados en el filtro
-  //   const filteredMovies = this.movies.filter(movie => allowedLanguages.includes(movie.original_language));
-
-  //   this.movies = filteredMovies
-  //   this.isLoading = false
-  // }
-
 }

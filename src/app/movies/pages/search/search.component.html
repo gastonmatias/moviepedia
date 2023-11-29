@@ -26,10 +26,7 @@
         class="flex col-12 justify-content-center text-center gap-4"
     >
         <!-- ! FILTRO ADULT -->
-        <!-- [(formControl)]="includeAdult" -->
-        <!-- [trueValue]="includeAdult"
-            [falseValue]="!includeAdult" -->
-            <p-checkbox
+        <p-checkbox
             [(ngModel)]="includeAdult"
             [value]="includeAdult"
             name="adult"
@@ -70,6 +67,7 @@
     <div *ngIf="searchTerm!='' && movies.length>0" class="align-self-end col-12 sm:col-11 md:col-10 lg:col-6">
         <shared-paginator
             [rows]="rows"
+            [first]="first"
             [totalRecords]="totalRecords"
             (paginatorChangePage)="onChangePage($event)"
         />
