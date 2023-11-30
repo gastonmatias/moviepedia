@@ -16,9 +16,16 @@ export class MediaGalleryComponent {
     private router: Router
   ) {}
 
-  onImageClick(item:MovieListItem){
+  onClickItem(item:MovieListItem){
     console.log(item);
     this.router.navigate([`/movies/${item.id}`])
   }
-  
+
+  getImageUrl(item: any): string {
+    if (item.poster_path===null) return '/assets/images/no_poster.png';
+    if (item.adult) return '/assets/images/sensitive_content2.png';
+
+    return 'https://image.tmdb.org/t/p/w500/' + item.poster_path;
+  }
+
 }

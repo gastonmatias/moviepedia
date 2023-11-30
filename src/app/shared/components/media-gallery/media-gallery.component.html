@@ -1,13 +1,21 @@
-<!-- <p-scrollPanel [style]="{ width: '100%', height: '80vh' }"> -->
 <div class="grid grid-nogutter sm:justify-content-center xs:justify-content-around gallery-container">
     <div class="col-6 sm:col-3 md:col-3 lg:col-2 lg:m-1" *ngFor="let item of mediaItems">
-        <p-image
-            [src]="'https://image.tmdb.org/t/p/w500/'+item.poster_path" 
-            alt="item.title"
-            width="100%"
-            class="gallery-item"
-            (click)="onImageClick(item)"
-        />
+        <div class="gallery-item" (click)="onClickItem(item)">
+                <div class="overlay-text-container">
+                   <p class="overlay-text">
+                       {{ item.title }}
+                   </p> 
+                </div>
+                
+                <div class="hoverable-image-container">
+                    <img 
+                    class="hoverable-image"
+                    [src]="getImageUrl(item)"
+                    [alt]="item.title"
+                    width="100%"
+                    
+                    >
+                </div>
+        </div>
     </div>
 </div>
-<!-- </p-scrollPanel> -->
