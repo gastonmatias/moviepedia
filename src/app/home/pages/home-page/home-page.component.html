@@ -4,27 +4,31 @@
         <h2>The MovieDB Content</h2>
     </div>
     
-    <div class="col-12 justify-content-center">
+    <div  [style]="{'min-height':'20vh','min-width':'75vw'}" class="col-12 justify-content-center">
         <app-carousel
             [title]="'Trending Movies'"
             [mediaArray]="trendingMovies"
+            *ngIf=" trendingMovies.length>0 && !isLoadingTrending"
         />
+        <shared-spinner *ngIf="isLoadingTrending"/>
     </div>
     
-    <!-- <div class="col-12 justify-content-center border border-1"> -->
-    <div class="col-12 justify-content-center ">
+    <div  [style]="{'min-height':'20vh','min-width':'75vw'}" class="col-12 justify-content-center">
         <app-carousel
             [title]="'Popular Movies'"
             [mediaArray]="popularMovies"
+            *ngIf=" popularMovies.length>0 && !isLoadingPopular"
         />
+        <shared-spinner *ngIf="isLoadingPopular"/>
     </div>
     
-    <!-- <div class="col-12 justify-content-center border border-1"> -->
-    <div class="col-12 justify-content-center">
+    <div  [style]="{'min-height':'20vh','min-width':'75vw'}" class="col-12 justify-content-center">
         <app-carousel
             [title]="'Top Rated Movies'"
             [mediaArray]="topRatedMovies"
+            *ngIf=" topRatedMovies.length>0 && !isLoadingTopRated"
         />
+        <shared-spinner *ngIf="isLoadingTopRated"/>
     </div>
     
 </div>
