@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ThemoviedbService } from 'src/app/themoviedb/themoviedb.service';
 import { MovieListItem, MovieAPIResponse, MoviePageType } from '../../interfaces/movieList';
 import * as movieHelper from 'src/app/shared/helpers/movieHelper';
+import { HttpParams } from '@angular/common/http';
+import {Location} from '@angular/common';
 
 @Component({
   templateUrl: './generic-page.component.html',
@@ -11,27 +13,38 @@ import * as movieHelper from 'src/app/shared/helpers/movieHelper';
 export class GenericPageComponent implements OnInit {
   
   public movies: MovieListItem[] = [];
-  public page: number = 1;
+  public page: number = 1
+  public first: number = 0
   public totalRecords: number = 20;
   public rows: number = 0;
   public pageType: string = '';
   public title: string = '';
   public isLoading:boolean = true
-
+  
   constructor(
     private themoviedbService: ThemoviedbService,
-    private route: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _location: Location,
   ) { }
 
   ngOnInit(): void {
-    const currentPath = this.route.snapshot.url[0].path;
+    // determina que tipo pagina es y setea titulo dinamicamente (popular | trending | best rated)
+    const currentPath = this.activatedRoute.snapshot.url[0].path;
     this.pageType     = movieHelper.getPageType(currentPath)!
     this.title        = movieHelper.setPageTitle(this.pageType)!
-    this.getMovies();
+    
+    // obtiene valores de page y first desde query params para posterior exec de api call
+    this.activatedRoute.queryParams.subscribe(params => {
+      const pageParam = params['page'];
+      const firstParam = params['first'];
+      this.page = +pageParam
+      this.first = +firstParam
+    });
 
-    console.log({route:this.route.snapshot});
+    this.getMovies();
   }
 
+  // exec api call y rellena variable "movies" dependiendo que tipo de pagina es (popular | trending | best rated)
   getMovies() {
     this.isLoading = true
 
@@ -40,7 +53,7 @@ export class GenericPageComponent implements OnInit {
         this.themoviedbService.getTrendingMovies(this.page)
           .subscribe( (resp:MovieAPIResponse) => {
             this.movies = resp.results
-            this.setPaginatorProperties(resp)         
+            this.setPaginatorProps(resp)         
             this.isLoading = false
           })
           break;
@@ -49,7 +62,7 @@ export class GenericPageComponent implements OnInit {
           this.themoviedbService.getPopularMovies(this.page)
             .subscribe( (resp:MovieAPIResponse) => {
               this.movies = resp.results
-              this.setPaginatorProperties(resp)
+              this.setPaginatorProps(resp)
               this.isLoading = false         
             })
             break;
@@ -58,23 +71,41 @@ export class GenericPageComponent implements OnInit {
           this.themoviedbService.getTopRatedMovies(this.page)
             .subscribe( (resp:MovieAPIResponse) => {
               this.movies = resp.results
-              this.setPaginatorProperties(resp)         
+              this.setPaginatorProps(resp)         
               this.isLoading = false
             })
           break;
     }
   }
 
-  setPaginatorProperties(resp:MovieAPIResponse){
-    const totalRecords = resp.total_results > 500*20 ? 500*20 : resp.total_results // spoiler: API moviedb LIMITA busqueda a 20 items con MAXIMO 500 paginas, luego de eso arroja error "Invalid page: Pages start at 1 and max at 500"
-    const rows = resp.results.length // spoiler: siempre es 20
-    
+  setPaginatorProps(resp:MovieAPIResponse){
+    const {totalRecords, rows} = movieHelper.setPaginatorProperties(resp)
     this.totalRecords = totalRecords
     this.rows = rows
   }
 
-  onChangePage(page: number) {
-    this.page = page;
+  onChangePage(event: any) {
+    // seteo de nuevos valores de page y first proveniente de event de paginator
+    this.page = event.page+1; // +1 pq paginator de ngprime comienza en 0
+    this.first = event.first
+    
+    // actualiza valores de query params (page y first) para posterior exec de api call
+    this.updateURLWithNewParamsWithoutReloading()
+    
+    // exec api call con valor de page actualizado
     this.getMovies();
   }
+
+  updateURLWithNewParamsWithoutReloading() {
+    const params = new HttpParams().appendAll({
+      first: this.first,
+      page: this.page
+    });
+
+    this._location.replaceState(
+      location.pathname,
+      params.toString()
+    );
+  } 
+
 }

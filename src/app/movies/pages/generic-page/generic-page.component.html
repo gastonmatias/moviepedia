@@ -1,22 +1,23 @@
 <div class="grid grid-nogutter justify-content-center" >
     
     <div class="col-12 text-center">
-        <h2 class="">{{pageType}}</h2>
+        <h2 class="">
+            {{pageType}}
+        </h2>
     </div>
     
     <div  [style]="{'min-height':'75vh','min-width':'75vw'}" class="">
-        <shared-media-gallery
-            [mediaItems]="movies"
-            *ngIf="movies.length>0 && !isLoading"
-        />
-
+            <shared-media-gallery
+                [mediaItems]="movies"
+                *ngIf="movies.length>0 && !isLoading"
+            />
         <shared-spinner *ngIf="isLoading"/>
-
     </div>
 
     <div class="align-self-end col-12 sm:col-11 md:col-10 lg:col-6">
         <shared-paginator
             [rows]="rows"
+            [first]="first"
             [totalRecords]="totalRecords"
             (paginatorChangePage)="onChangePage($event)"
         />
