@@ -1,0 +1,5 @@
+/*! pixelea poster_path de movie con categoria adult*/
+.censured-image{
+    image-rendering: pixelated;
+    filter: blur(20px) grayscale(100%) brightness(50%) contrast(100%) saturate(0.1) invert(0);
+}
