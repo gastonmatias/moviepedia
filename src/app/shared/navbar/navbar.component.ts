@@ -10,7 +10,7 @@ import { SearchService } from '../../movies/pages/search/search.service';
 })
 export class NavbarComponent implements OnInit {
 
-  items: MenuItem[] | undefined;
+  public items: MenuItem[] | undefined;
 
   public searchTerm: string = '';
 
@@ -25,19 +25,22 @@ export class NavbarComponent implements OnInit {
               label: 'Trending',
               // icon: 'fa-regular fa-fire',
               icon: 'pi pi-fw pi-bolt',
-              routerLink: 'movies/trending'
+              routerLink: 'movies/trending',
+              queryParams: { page: 1, first: 0 }
           },
           {
               label: 'Popular',
               // icon: 'pi pi-fw pi-thumbs-up-fill',
               icon: 'pi pi-fw pi-thumbs-up',
-              routerLink: 'movies/popular'
+              routerLink: 'movies/popular',
+              queryParams: { page: 1, first: 0 }
           },
           {
               label: 'Best Rated',
               // icon: 'pi pi-fw pi-star-fill',
               icon: 'pi pi-fw pi-star',
-              routerLink: 'movies/best-rated'
+              routerLink: 'movies/best-rated',
+              queryParams: { page: 1, first: 0 }
           },
 
       ];
@@ -46,8 +49,12 @@ export class NavbarComponent implements OnInit {
   onSearch (ev: KeyboardEvent | MouseEvent ) {
     // Si es un KeyboardEvent y la tecla es 'Enter' o es un MouseEvent y el tipo es 'click'
     if ((ev as KeyboardEvent).key==='Enter' || (ev as MouseEvent).type==='click') {
-      this.searchService.setSearchTerm(this.searchTerm) // setea el serchTerm
-      this.router.navigate([`/movies/search`]) //redirige a pagina search
+      // setea el serchTerm
+      this.searchService.setSearchTerm(this.searchTerm) 
+      //redirige a pagina search con default query params
+      this.router.navigate([`/movies/search`], {
+        queryParams:{ q:this.searchTerm, page:1, first:0, year:'', includeAdult:false }
+      }) 
     }
   }
 
