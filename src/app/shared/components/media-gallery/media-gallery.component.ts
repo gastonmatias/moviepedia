@@ -17,7 +17,6 @@ export class MediaGalleryComponent {
   ) {}
 
   onClickItem(item:MovieListItem){
-    console.log(item);
     this.router.navigate([`/movies/${item.id}`])
   }
 
